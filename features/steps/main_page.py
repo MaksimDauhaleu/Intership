@@ -29,11 +29,10 @@ def verify_page(context):
 
 @when('Go to the final page using the pagination button')
 def loop_to_end(context):
-    # context.app.base_page.click(*PAGINATION_BTN_NEXT)
-    # sleep(3)
-
     context.app.main_page.loop_to_end()
-    # while current_page < total_page:
-    #     context.app.base_page.click(*PAGINATION_BTN_NEXT)
-    # print(total_page.text)
     sleep(5)
+
+
+@when('Go back to the first page using the pagination button')
+def loop_back(context):
+    context.app.main_page.loop_back()

@@ -3,11 +3,12 @@ from selenium.webdriver.common.by import By
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 
+
 class MainPage(Page):
     CURRENT_PAGE = (By.XPATH, "//div[@wized = 'currentPageProperties']")
     TOTAL_PAGES = (By.XPATH, "//div[@wized = 'totalPageProperties']")
     PAGINATION_BTN_NEXT = (By.XPATH, "//a[@wized = 'nextPageProperties']")
-    PAGINATION_BTN_PREVIOUS = (By.XPATH, "//a[@wized = 'previousPageProperties']")
+    PAGINATION_BTN_PREVIOUS = (By.XPATH, "//div[@wized = 'previousPageProperties']")
 
     def open_main_page(self):
         self.open_url('https://soft.reelly.io')
@@ -25,13 +26,18 @@ class MainPage(Page):
 
     def loop_to_end(self):
         sleep(3)
-        # current_page = self.find_current_page()
         total_pages = self.find_total_page()
         sleep(3)
-        for x in range(0, len(total_pages)):
-            if x < total_pages:
+        for x in range(0, int(total_pages)):
+            if x < int(total_pages):
                 self.click(*self.PAGINATION_BTN_NEXT)
                 x += 1
-            sleep(3)
-        # print(current_page)
-        # print(total_pages)
+                sleep(2)
+
+    def loop_back(self):
+        current_page = self.find_current_page()
+        sleep(3)
+        while int(current_page) > 1:
+            self.click(*self.PAGINATION_BTN_PREVIOUS)
+            sleep(2)
+            current_page = self.find_current_page()
