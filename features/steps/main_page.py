@@ -33,6 +33,6 @@ def loop_to_end(context):
     sleep(5)
 
 
-@when('Go back to the first page using the pagination button')
+@then('Go back to the first page using the pagination button')
 def loop_back(context):
     context.app.main_page.loop_back()
