@@ -3,17 +3,22 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from app.application import Application
-from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 
 def browser_init(context):
     """
     :param context: Behave context
     """
+    # options = Options()
+    # options.add_argument('--headless=new')
+    # driver_path = ChromeDriverManager().install()
+    # service = Service(driver_path)
+    # context.driver = webdriver.Chrome(service=service, options=options)
+
     options = Options()
-    options.add_argument('--headless=new')
-    driver_path = ChromeDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service, options=options)
+    options.add_argument("-headless")
+    context.driver = webdriver.Firefox(options=options)
     context.driver.wait = WebDriverWait(context.driver, 10)
 
 
