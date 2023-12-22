@@ -41,3 +41,5 @@ class MainPage(Page):
             self.click(*self.PAGINATION_BTN_PREVIOUS)
             sleep(2)
             current_page = self.find_current_page()
+
+
